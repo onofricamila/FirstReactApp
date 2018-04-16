@@ -1,0 +1,10 @@
+/* this will be a global class, because this css 
+is injected in the head of the single webpage */
+.Person{
+    width: 60%;
+    border: 1px solid #eee;
+    box-shadow:0 20px 20px #ccc;
+    text-align: center;
+    margin: 50px auto;
+    padding: 10px;
+}
