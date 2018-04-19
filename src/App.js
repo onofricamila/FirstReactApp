@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 class App extends Component {
   state = {
@@ -48,11 +49,11 @@ class App extends Component {
       // ineficiente
       <div className="App">
           <h1> Camila's first React app :) </h1>
-          <button 
+          <Button bsStyle="primary"
             onClick={() => this.switchNameHandler('Camiluchis')}
             style={style}
             >Switch Name
-          </button>
+          </Button>
           <Person 
             name={this.state.persons[0].name} 
             age={this.state.persons[0].age}

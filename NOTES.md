@@ -8,6 +8,11 @@
 
 * run `npm start` to start the server thar hosts our recently created app
 
+### How to use bootstrap
+
+* installing -> https://github.com/facebook/create-react-app/issues/301
+* finding components -> https://react-bootstrap.github.io/components/buttons/
+
 ### If you already have npm and just downloaded a react app ...
 
 * cd to the app folder
