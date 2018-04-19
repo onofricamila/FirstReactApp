@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 class App extends Component {
@@ -27,15 +28,10 @@ deletePersonHandler = (index) => {
     // use always setters provided by Component, do not change the state directly
     // other will remain, only persons will change
     const personIndex = this.state.persons.findIndex(p => {return p.id === id;});
-    
     const per = {...this.state.persons[personIndex]};
-
     per.name = event.target.value;
-
     const persons = [...this.state.persons];
-
     persons[personIndex] = per;
-   
     this.setState({
       persons: persons
     });
@@ -52,23 +48,16 @@ deletePersonHandler = (index) => {
 
     if (this.state.showPersons) {
       pers = (
-        <div >
            <Persons
                   persons={this.state.persons}
                   clicked={this.deletePersonHandler}
                   changed={this.nameChangedHandler}/>
-        
-        </div> 
       );
     }
 
     return (
       <div className="App">
-          <h1> Camila's first React app :) </h1>
-          <Button bsStyle="primary"
-            onClick={ this.togglePersonsHandler}>
-            TOGGLE
-          </Button>
+          <Cockpit title={this.props.title} toggle={this.togglePersonsHandler}/>
           {pers}
       </div>
     );
