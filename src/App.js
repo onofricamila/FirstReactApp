@@ -6,34 +6,38 @@ import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 class App extends Component {
   state = {
     persons: [
-      {name:'Cam', age:21},
-      {name:'Mel', age:21}
+      {id: 'afdsj' , name:'Cam', age:21},
+      {id: 'afdsj1' , name:'Mel', age:21}
     ],
     other: 'other property',
     showPersons: false
   }
 
-  switchNameHandler = (newName) => {
-    // console.log('clicked');
-    // use always setters provided by Component, do not change the state directly
-    // other will remain, only persons will change
-    this.setState({
-      persons: [
-        {name:newName, age:21},
-        {name:'Mel', age:21}
-      ]
-    });
-  }
+deletePersonHandler = (index) => {
+  // const persons = this.state.persons.slice;
+  const persons = [...this.state.persons];
+  persons.splice(index, 1);
+  this.setState({
+    persons: persons
+  });
+}
 
- nameChangedHandler = (event) => {
+ nameChangedHandler = (event, id) => {
     // console.log('clicked');
     // use always setters provided by Component, do not change the state directly
     // other will remain, only persons will change
+    const personIndex = this.state.persons.findIndex(p => {return p.id === id;});
+    
+    const per = {...this.state.persons[personIndex]};
+
+    per.name = event.target.value;
+
+    const persons = [...this.state.persons];
+
+    persons[personIndex] = per;
+   
     this.setState({
-      persons: [
-        {name:event.target.value, age:21},
-        {name:'Mel', age:21}
-      ]
+      persons: persons
     });
   }
 
@@ -55,18 +59,19 @@ class App extends Component {
     let pers = null;
 
     if (this.state.showPersons) {
+      
       pers = (
         <div >
-          <Person 
-            name={this.state.persons[0].name} 
-            age={this.state.persons[0].age}
-            changed={this.nameChangedHandler} />
-          <Person 
-            name={this.state.persons[1].name} 
-            age={this.state.persons[0].age}
-            click={this.switchNameHandler.bind(this, 'Camilinda')}>
-            Lala 
-          </Person>
+        
+        {this.state.persons.map((per, index) => {
+          return <Person 
+                  click={() => this.deletePersonHandler(index)}
+                  name={per.name} 
+                  age={per.age}
+                  key={per.id}
+                  changed={(event) => this.nameChangedHandler(event, per.id)}/>
+        })}
+          
         </div> 
       );
     }
