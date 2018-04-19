@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
 import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 class App extends Component {
@@ -10,7 +10,7 @@ class App extends Component {
       {id: 'afdsj1' , name:'Mel', age:21}
     ],
     other: 'other property',
-    showPersons: false
+    showPersons: true
   }
 
 deletePersonHandler = (index) => {
@@ -47,47 +47,29 @@ deletePersonHandler = (index) => {
   }
 
   render() {
-    // coding style with js, to make inline style and assure it wont be global
-    // but delimited to the block scope
-    const style = {
-      backgroudColor: 'white', 
-      padding: '7px',
-      border: '1px solid darkred',
-      cursor: 'pointer'
-    }
 
     let pers = null;
 
     if (this.state.showPersons) {
-      
       pers = (
         <div >
+           <Persons
+                  persons={this.state.persons}
+                  clicked={this.deletePersonHandler}
+                  changed={this.nameChangedHandler}/>
         
-        {this.state.persons.map((per, index) => {
-          return <Person 
-                  click={() => this.deletePersonHandler(index)}
-                  name={per.name} 
-                  age={per.age}
-                  key={per.id}
-                  changed={(event) => this.nameChangedHandler(event, per.id)}/>
-        })}
-          
         </div> 
       );
     }
 
     return (
-      // ineficiente
       <div className="App">
           <h1> Camila's first React app :) </h1>
           <Button bsStyle="primary"
-            onClick={ this.togglePersonsHandler}
-            style={style}>
+            onClick={ this.togglePersonsHandler}>
             TOGGLE
           </Button>
-       
-           {pers}
-
+          {pers}
       </div>
     );
  // above code gets compiled to below code
