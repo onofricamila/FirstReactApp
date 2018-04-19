@@ -9,7 +9,8 @@ class App extends Component {
       {name:'Cam', age:21},
       {name:'Mel', age:21}
     ],
-    other: 'other property'
+    other: 'other property',
+    showPersons: false
   }
 
   switchNameHandler = (newName) => {
@@ -36,6 +37,11 @@ class App extends Component {
     });
   }
 
+  togglePersonsHandler = () => {
+      const doesShow = this.state.showPersons;
+      this.setState({showPersons: !doesShow});
+  }
+
   render() {
     // coding style with js, to make inline style and assure it wont be global
     // but delimited to the block scope
@@ -45,27 +51,38 @@ class App extends Component {
       border: '1px solid darkred',
       cursor: 'pointer'
     }
+
+    let pers = null;
+
+    if (this.state.showPersons) {
+      pers = (
+        <div >
+          <Person 
+            name={this.state.persons[0].name} 
+            age={this.state.persons[0].age}
+            changed={this.nameChangedHandler} />
+          <Person 
+            name={this.state.persons[1].name} 
+            age={this.state.persons[0].age}
+            click={this.switchNameHandler.bind(this, 'Camilinda')}>
+            Lala 
+          </Person>
+        </div> 
+      );
+    }
+
     return (
       // ineficiente
       <div className="App">
           <h1> Camila's first React app :) </h1>
           <Button bsStyle="primary"
-            onClick={() => this.switchNameHandler('Camiluchis')}
-            style={style}
-            >Switch Name
+            onClick={ this.togglePersonsHandler}
+            style={style}>
+            TOGGLE
           </Button>
-          <Person 
-            name={this.state.persons[0].name} 
-            age={this.state.persons[0].age}
-            changed={this.nameChangedHandler}
-          />
-          <Person 
-            name={this.state.persons[1].name} 
-            age={this.state.persons[0].age}
-            click={this.switchNameHandler.bind(this, 'Camilinda')}
-          >
-             Lala 
-          </Person>
+       
+           {pers}
+
       </div>
     );
  // above code gets compiled to below code
