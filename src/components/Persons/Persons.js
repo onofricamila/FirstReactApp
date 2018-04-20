@@ -15,6 +15,15 @@ class Persons extends Component{
         console.log('[PersonS.js] Did mount');
       }
 
+      componentWillReceiveProps(nextProps){
+        console.log('[UPDATE Persons.js] will receibe props', nextProps);
+      }
+
+      shouldComponentUpdate(nextProps, nextState){
+        console.log('[UPDATE Persons.js] should update props', nextProps);
+        return false;
+      }
+
     render (){
         console.log('[PersonS.js] render');
         return this.props.persons.map((per, index) => {
