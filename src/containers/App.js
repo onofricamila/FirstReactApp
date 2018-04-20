@@ -5,13 +5,27 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 class App extends Component {
+
+  constructor(props){
+    super(props);
+    console.log('[App.js] inside constructor ', props);
+  }
+
+  componentWillMount(){
+    console.log('[App.js] will mount');
+  }
+
+  componentDidMount(){
+    console.log('[App.js] Did mount');
+  }
+
   state = {
     persons: [
       {id: 'afdsj' , name:'Cam', age:21},
       {id: 'afdsj1' , name:'Mel', age:21}
     ],
     other: 'other property',
-    showPersons: true
+    showPersons: false
   }
 
 deletePersonHandler = (index) => {
@@ -43,7 +57,7 @@ deletePersonHandler = (index) => {
   }
 
   render() {
-
+    console.log('[App.js] render');
     let pers = null;
 
     if (this.state.showPersons) {

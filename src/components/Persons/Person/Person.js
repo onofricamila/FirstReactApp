@@ -1,14 +1,32 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './Person.css';
 
-const person = (props) => {
-    return (
-        <div className="Person" >
-           <p> Hi i am {props.name}, {props.age} years old </p>
-           <p onClick={props.click}> lala </p>
-           <input type="text" onChange={props.changed} value={props.name}/>
-        </div> 
-    )
-}
+class Person extends Component{
 
-export default person;
+    constructor(props){
+        super(props);
+        console.log('[Person.js] inside constructor ', props);
+      }
+    
+      componentWillMount(){
+        console.log('[Person.js] will mount');
+      }
+    
+      componentDidMount(){
+        console.log('[Person.js] Did mount');
+      }
+
+    render (){
+        console.log('[Person.js] render');
+        return (
+            <div className="Person" >
+               <p> Hi i am {this.props.name}, {this.props.age} years old </p>
+               <p onClick={this.props.click}> lala </p>
+               <input type="text" onChange={this.props.changed} value={this.props.name}/>
+            </div> 
+        )
+    }
+}
+   
+
+export default Person;
