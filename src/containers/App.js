@@ -3,12 +3,23 @@ import './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import { Navbar, Jumbotron, Button } from 'react-bootstrap';
+import Aux from '../hoc/Aux';
+import withClass from '../hoc/withClass';
 
 class App extends Component {
 
   constructor(props){
     super(props);
     console.log('[App.js] inside constructor ', props);
+    this.state = {
+      persons: [
+        {id: 'afdsj' , name:'Cam', age:21},
+        {id: 'afdsj1' , name:'Mel', age:21}
+      ],
+      other: 'other property',
+      showPersons: false,
+      toggleClicked: 0
+    }
   }
 
   componentWillMount(){
@@ -19,23 +30,15 @@ class App extends Component {
     console.log('[App.js] Did mount');
   }
 
-  state = {
-    persons: [
-      {id: 'afdsj' , name:'Cam', age:21},
-      {id: 'afdsj1' , name:'Mel', age:21}
-    ],
-    other: 'other property',
-    showPersons: false
-  }
 
-deletePersonHandler = (index) => {
-  // const persons = this.state.persons.slice;
-  const persons = [...this.state.persons];
-  persons.splice(index, 1);
-  this.setState({
-    persons: persons
-  });
-}
+  deletePersonHandler = (index) => {
+    // const persons = this.state.persons.slice;
+    const persons = [...this.state.persons];
+    persons.splice(index, 1);
+    this.setState({
+      persons: persons
+    });
+  }
 
  nameChangedHandler = (event, id) => {
     // console.log('clicked');
@@ -70,14 +73,14 @@ deletePersonHandler = (index) => {
     }
 
     return (
-      <div className="App">
+      <Aux>
           <Cockpit title={this.props.title} toggle={this.togglePersonsHandler}/>
           {pers}
-      </div>
+      </Aux>
     );
  // above code gets compiled to below code
  // return React.createElement('div',{ className:"App"}, React.createElement('h1', null, 'Camila\'s first React app :)'));
   }
 }
 
-export default App;
+export default withClass(App, 'App') ;
