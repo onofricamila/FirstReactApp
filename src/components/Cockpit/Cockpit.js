@@ -10,6 +10,16 @@ const cockpit = (props) => {
             onClick={ props.toggle}>
             TOGGLE
             </Button>
+
+            <Button bsStyle="warning"
+            onClick={ props.login}>
+            LOG IN
+            </Button>
+
+            <Button bsStyle="danger"
+            onClick={ props.logout}>
+            LOG OUT
+            </Button>
         </Aux>
     );
 }

@@ -6,6 +6,8 @@ import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 import Aux from '../hoc/Aux';
 import withClass from '../hoc/withClass';
 
+export const AuthContext = React.createContext(false);
+
 class App extends Component {
 
   constructor(props){
@@ -13,12 +15,13 @@ class App extends Component {
     console.log('[App.js] inside constructor ', props);
     this.state = {
       persons: [
-        {id: 'afdsj' , name:'Cam', age:'21'},
+        {id: 'afdsj' , name:'Cam', age:21},
         {id: 'afdsj1' , name:'Mel', age:21}
       ],
       other: 'other property',
       showPersons: false,
-      toggleClicked: 0
+      toggleClicked: 0,
+      authenticated: false
     }
   }
 
@@ -64,6 +67,15 @@ class App extends Component {
       } );
   }
 
+  loginHandler = () => {
+    this.setState({authenticated:true});
+  }
+
+  logoutHandler = () => {
+    this.setState({authenticated:false});
+  }
+
+
   render() {
     console.log('[App.js] render');
     let pers = null;
@@ -79,8 +91,14 @@ class App extends Component {
 
     return (
       <Aux>
-          <Cockpit title={this.props.title} toggle={this.togglePersonsHandler}/>
-          {pers}
+          <Cockpit 
+          title={this.props.title} 
+          login={this.loginHandler}
+          logout={this.logoutHandler}
+          toggle={this.togglePersonsHandler}/>
+          <AuthContext.Provider value={this.state.authenticated}>
+           {pers}
+          </AuthContext.Provider>
       </Aux>
     );
  // above code gets compiled to below code
