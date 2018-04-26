@@ -13,7 +13,7 @@ class App extends Component {
     console.log('[App.js] inside constructor ', props);
     this.state = {
       persons: [
-        {id: 'afdsj' , name:'Cam', age:21},
+        {id: 'afdsj' , name:'Cam', age:'21'},
         {id: 'afdsj1' , name:'Mel', age:21}
       ],
       other: 'other property',
